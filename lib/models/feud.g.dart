@@ -17,22 +17,24 @@ class FeudAdapter extends TypeAdapter<Feud> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Feud(
-      name: fields[0] as String,
-      foes: fields[1] == null ? const [] : (fields[1] as List).cast<Foe>(),
+      name: fields[1] as String,
+      foes: fields[2] == null ? const [] : (fields[2] as List).cast<Foe>(),
       skirmishes:
-          fields[2] == null ? const [] : (fields[2] as List).cast<Skirmish>(),
+          fields[3] == null ? const [] : (fields[3] as List).cast<Skirmish>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Feud obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.foes)
+      ..write(obj.name)
       ..writeByte(2)
+      ..write(obj.foes)
+      ..writeByte(3)
       ..write(obj.skirmishes);
   }
 
