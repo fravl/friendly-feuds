@@ -10,8 +10,9 @@ import 'screens/feud_screen.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
-  await Hive.openBox("storage");
   Hive.registerAdapters();
+
+  await Hive.openBox("storage");
 
   Get.lazyPut<FeudService>(() => FeudService());
   Get.lazyPut<FeudController>(() => FeudController());
@@ -26,10 +27,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Friendly Feuds',
-      theme: appTheme(),
       initialRoute: "/",
       getPages: [
-        GetPage(name: "/", page: () => throw FeudScreen()),
+        GetPage(name: "/", page: () => FeudScreen()),
         GetPage(name: "/feuds/:feud", page: () => throw UnimplementedError()),
         GetPage(
             name: "/feuds/:feud/stats", page: () => throw UnimplementedError()),
