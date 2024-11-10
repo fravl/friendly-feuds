@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friendly_feud/screens/feud_starter_screen.dart';
 import 'package:friendly_feud/services/feud_controller.dart';
 import 'package:friendly_feud/widgets/custom_scaffold.dart';
 import 'package:friendly_feud/widgets/flexible_grid.dart';
@@ -14,6 +15,8 @@ class FeudScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      title: "Friendly Feuds",
+      floatingButtonFunc: () => Get.to(() => FeudStarterScreen()),
       child: Obx(() {
         final feuds = feudController.feuds;
 
