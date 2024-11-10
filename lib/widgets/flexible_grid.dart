@@ -9,18 +9,17 @@ class FlexibleGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-    var count = 4;
+    var count = 3;
     if (width < 480) {
       count = 1;
     } else if (width < 640) {
       count = 2;
-    } else if (width < 768) {
-      count = 3;
     }
 
     return GridView.count(
       padding: const EdgeInsets.all(8),
       crossAxisCount: count,
+      childAspectRatio: 2 / 1,
       children: gridItems,
     );
   }

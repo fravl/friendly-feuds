@@ -10,30 +10,50 @@ class FeudCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: ListTile(
-      title: Text(feud.name),
-      contentPadding: const EdgeInsets.all(16.0),
-      subtitle: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Tooltip(
-            message: "Foes",
-            child: Row(children: [
-              const Icon(Icons.people),
-              const SizedBox(width: 4),
-              Text(
-                feud.foes.length.toString(),
-              ),
-            ])),
-        const SizedBox(width: 8),
-        Tooltip(
-            message: "Skirmishes",
-            child: Row(children: [
-              const Icon(Icons.sports_mma),
-              const SizedBox(width: 4),
-              Text(
-                feud.skirmishes.length.toString(),
-              ),
-            ]))
-      ]),
-    ));
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              feud.name,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Tooltip(
+                  message: "Foes",
+                  child: Row(
+                    children: [
+                      const Icon(Icons.people),
+                      const SizedBox(width: 4),
+                      Text(
+                        feud.foes.length.toString(),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Tooltip(
+                  message: "Skirmishes",
+                  child: Row(
+                    children: [
+                      const Icon(Icons.sports_mma),
+                      const SizedBox(width: 4),
+                      Text(
+                        feud.skirmishes.length.toString(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
