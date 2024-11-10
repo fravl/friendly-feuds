@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:friendly_feud/services/feud_controller.dart';
-import 'package:friendly_feud/widgets/feud_list.dart';
+import 'package:friendly_feud/widgets/custom_scaffold.dart';
+import 'package:friendly_feud/widgets/flexible_grid.dart';
 import 'package:get/get.dart';
+
+import '../widgets/feud_card.dart';
 
 class FeudScreen extends StatelessWidget {
   final feudController = Get.find<FeudController>();
@@ -10,27 +13,17 @@ class FeudScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Feuds'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {
-              // Handle adding a new feud here
-              // Example: feudController.addFeud(newFeud);
-            },
-          ),
-        ],
-      ),
-      body: Obx(() {
+    return CustomScaffold(
+      child: Obx(() {
         final feuds = feudController.feuds;
 
         if (feuds.isEmpty) {
           return const Center(child: Text('No feuds available.'));
         }
 
-        return FeudList(feuds: feuds.values.toList());
+        return FlexibleGrid(
+            gridItems:
+                feuds.values.map((feud) => FeudCard(feud: feud)).toList());
       }),
     );
   }
