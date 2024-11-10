@@ -7,7 +7,6 @@ const foe2 = Foe(name: 'Bob');
 const foe3 = Foe(name: 'Charlie');
 const foe4 = Foe(name: 'Diana');
 
-// Example Skirmish instances
 var skirmish1 = Skirmish(
   date: DateTime(2023, 5, 12),
   results: {
@@ -42,7 +41,6 @@ var skirmish4 = Skirmish(
   },
 );
 
-// Example Feud instances
 final boardGameFeud = Feud(
   name: 'Board Game Bonanza',
   foes: [foe1, foe2, foe3, foe4],
@@ -70,5 +68,4 @@ final pubQuizFeud = Feud(
   ],
 );
 
-// List of all feuds for easy access
 final allFeuds = [boardGameFeud, pubQuizFeud];

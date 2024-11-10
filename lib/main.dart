@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:friendly_feud/app_theme.dart';
+import 'package:friendly_feud/hive_registrar.g.dart';
+import 'package:get/get.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
-void main() {
+import 'screens/feud_screen.dart';
+
+Future<void> main() async {
+  await Hive.initFlutter();
+  await Hive.openBox("storage");
+  Hive.registerAdapters();
+
   runApp(const MainApp());
 }
 
@@ -9,12 +19,17 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return GetMaterialApp(
+      title: 'Friendly Feuds',
+      theme: appTheme(),
+      initialRoute: "/",
+      getPages: [
+        GetPage(name: "/", page: () => throw FeudScreen()),
+        GetPage(name: "/feuds/:feud", page: () => throw UnimplementedError()),
+        GetPage(
+            name: "/feuds/:feud/stats", page: () => throw UnimplementedError()),
+        GetPage(name: "/welcome", page: () => throw UnimplementedError()),
+      ],
     );
   }
 }
