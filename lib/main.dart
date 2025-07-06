@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:friendly_feud/app_theme.dart';
 import 'package:friendly_feud/hive_registrar.g.dart';
+import 'package:friendly_feud/screens/skirmish_creator_screen.dart';
 import 'package:friendly_feud/screens/skirmishes_screen.dart';
 import 'package:friendly_feud/services/feud_controller.dart';
 import 'package:friendly_feud/services/feud_service.dart';
@@ -54,7 +55,7 @@ class MainApp extends StatelessWidget {
       getPages: [
         GetPage(name: "/", page: () => FeudScreen()),
         GetPage(name: "/feuds/:feud", page: () => SkirmishesScreen()),
-        GetPage(name: "/welcome", page: () => throw UnimplementedError()),
+        GetPage(name: "/feuds/:feud/skirmish", page: () => SkirmishCreatorScreen()),
       ],
     );
   }

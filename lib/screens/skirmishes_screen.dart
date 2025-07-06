@@ -17,6 +17,7 @@ class SkirmishesScreen extends StatelessWidget {
 
     return CustomScaffold(
       title: feud?.name ?? '',
+      floatingButtonFunc: () => Get.toNamed("/feuds/${feud?.id}/skirmish"),
       child: Obx(() {
         final feud = feudController.feuds[feudId];
         final skirmishes = feud?.skirmishes ?? [];
