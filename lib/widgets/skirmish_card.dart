@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../models/skirmish.dart';
 
 class SkirmishCard extends StatelessWidget {
@@ -9,39 +8,50 @@ class SkirmishCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var sortedResults = skirmish.sortedResults;
-    int highestScore = sortedResults.first.value;
-
-    String subtitle = '';
-    List<String> highlights = [];
-
-    for (var entry in sortedResults) {
-      String participantScore = '${entry.key.name}: ${entry.value}';
-      if (entry.value == highestScore) {
-        highlights.add(participantScore);
-      } else {
-        subtitle += '$participantScore\n';
-      }
-    }
-
-    subtitle += 'Winner(s): ${highlights.join(' & ')}';
+    final sortedResults = skirmish.sortedResults;
+    final highestScore =
+        sortedResults.isNotEmpty ? sortedResults.first.value : null;
 
     return Card(
-      child: ListTile(
-        title: Text(
-          skirmish.date.toLocal().toString(),
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(
-          subtitle,
-          style: TextStyle(
-            fontWeight: highestScore == sortedResults.first.value
-                ? FontWeight.bold
-                : FontWeight.normal,
-            color: highestScore == sortedResults.first.value
-                ? Colors.deepOrange
-                : Colors.black,
-          ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${skirmish.date.toLocal()}'.split(' ')[0],
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const SizedBox(height: 8),
+            ...sortedResults.map((entry) => Row(
+                  children: [
+                    if (highestScore != null && entry.value == highestScore)
+                      const Padding(
+                        padding: EdgeInsets.only(right: 6.0),
+                        child: Icon(Icons.emoji_events,
+                            color: Colors.amber, size: 20),
+                      )
+                    else
+                      const SizedBox(width: 26), // to align rows
+                    Text(
+                      '${entry.key.name}: ',
+                      style: TextStyle(
+                        fontWeight: entry.value == highestScore
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                      ),
+                    ),
+                    Text(
+                      '${entry.value}',
+                      style: TextStyle(
+                        fontWeight: entry.value == highestScore
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                      ),
+                    ),
+                  ],
+                )),
+          ],
         ),
       ),
     );
