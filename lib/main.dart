@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:friendly_feud/app_theme.dart';
 import 'package:friendly_feud/hive_registrar.g.dart';
+import 'package:friendly_feud/screens/skirmishes_screen.dart';
 import 'package:friendly_feud/services/feud_controller.dart';
 import 'package:friendly_feud/services/feud_service.dart';
 import 'package:get/get.dart';
@@ -38,10 +39,10 @@ class MainApp extends StatelessWidget {
     final brightness = View.of(context).platformDispatcher.platformBrightness;
 
     // Retrieves the default theme for the platform
-    //TextTheme textTheme = Theme.of(context).textTheme;
+    TextTheme textTheme = Theme.of(context).textTheme;
 
     // Use with Google Fonts package to use downloadable fonts
-    TextTheme textTheme = createTextTheme(context, "Comic Neue", "Nosifer");
+    //TextTheme textTheme = createTextTheme(context, "Comic Neue", "Nosifer");
 
     MaterialTheme theme = MaterialTheme(textTheme);
 
@@ -52,9 +53,7 @@ class MainApp extends StatelessWidget {
       initialRoute: "/",
       getPages: [
         GetPage(name: "/", page: () => FeudScreen()),
-        GetPage(name: "/feuds/:feud", page: () => throw UnimplementedError()),
-        GetPage(
-            name: "/feuds/:feud/stats", page: () => throw UnimplementedError()),
+        GetPage(name: "/feuds/:feud", page: () => SkirmishesScreen()),
         GetPage(name: "/welcome", page: () => throw UnimplementedError()),
       ],
     );

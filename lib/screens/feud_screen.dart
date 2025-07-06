@@ -25,8 +25,11 @@ class FeudScreen extends StatelessWidget {
         }
 
         return FlexibleGrid(
-            gridItems:
-                feuds.values.map((feud) => FeudCard(feud: feud)).toList());
+            gridItems: feuds.values
+                .map((feud) => InkWell(
+                    onTap: () => Get.toNamed('/feuds/${feud.id}'),
+                    child: FeudCard(feud: feud)))
+                .toList());
       }),
     );
   }
