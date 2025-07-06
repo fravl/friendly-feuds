@@ -36,6 +36,7 @@ class FeudController {
         foes: feud.foes,
         skirmishes: allSkirmishes,
       );
+      feuds[feud.id] = updatedFeud;
       feudService.updateFeud(feud.id, updatedFeud);
     }
   }
