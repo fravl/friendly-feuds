@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:friendly_feud/services/feud_controller.dart';
 import 'package:friendly_feud/widgets/custom_scaffold.dart';
+import 'package:friendly_feud/widgets/feud_stats.dart';
 import 'package:friendly_feud/widgets/flexible_grid.dart';
 import 'package:friendly_feud/widgets/skirmish_card.dart';
 import 'package:get/get.dart';
@@ -26,10 +27,28 @@ class SkirmishesScreen extends StatelessWidget {
           return const Center(child: Text('No skirmishes available.'));
         }
 
-        return FlexibleGrid(
-          gridItems: skirmishes
-              .map((skirmish) => SkirmishCard(skirmish: skirmish))
-              .toList(),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FeudStats(feud: feud!),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+              child: Text(
+                'Skirmishes',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Expanded(
+              child: FlexibleGrid(
+                gridItems: skirmishes
+                    .map((skirmish) => SkirmishCard(skirmish: skirmish))
+                    .toList(),
+              ),
+            ),
+          ],
         );
       }),
     );
