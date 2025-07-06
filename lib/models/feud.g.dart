@@ -17,6 +17,7 @@ class FeudAdapter extends TypeAdapter<Feud> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Feud(
+      id: fields[0] as String?,
       name: fields[1] as String,
       foes: fields[2] == null ? const [] : (fields[2] as List).cast<Foe>(),
       skirmishes:

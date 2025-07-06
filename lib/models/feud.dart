@@ -17,6 +17,10 @@ class Feud {
   @HiveField(3)
   final List<Skirmish> skirmishes;
 
-  Feud({required this.name, this.foes = const [], this.skirmishes = const []})
-      : id = const Uuid().v4();
+  Feud({
+    String? id,
+    required this.name,
+    this.foes = const [],
+    this.skirmishes = const [],
+  }) : id = id ?? const Uuid().v4();
 }
