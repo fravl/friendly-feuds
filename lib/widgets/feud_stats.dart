@@ -21,6 +21,7 @@ class FeudStats extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text('Feud Stats',
                 style: TextStyle(
@@ -28,8 +29,10 @@ class FeudStats extends StatelessWidget {
                   fontSize: 18,
                 )),
             const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Wrap(
+              alignment: WrapAlignment.spaceEvenly,
+              spacing: 20,
+              runSpacing: 12,
               children: [
                 _StatItem(
                   label: "Most Wins",
@@ -71,17 +74,27 @@ class _StatItem extends StatelessWidget {
     var valueString =
         '${value.scorers.map((f) => f.name).join(' & ')} (${value.stat})';
 
-    return Column(
-      children: [
-        Icon(icon, color: Colors.blueGrey),
-        const SizedBox(height: 4),
-        Text(
-          valueString,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-          textAlign: TextAlign.center,
-        ),
-        Text(label, style: const TextStyle(fontSize: 12, color: Colors.grey)),
-      ],
+    return SizedBox(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: Colors.blueGrey, size: 28),
+          const SizedBox(height: 4),
+          Text(
+            valueString,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Text(label,
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
+              textAlign: TextAlign.center),
+        ],
+      ),
     );
   }
 }
